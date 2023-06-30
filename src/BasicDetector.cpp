@@ -30,6 +30,17 @@ G4VPhysicalVolume* BasicDetector::Construct( std::string Name, G4LogicalVolume* 
   LYSO->AddElement( Si, 6.37  * perCent );
   LYSO->AddElement( O,  18.14 * perCent );
   LYSO->AddElement( Ce, 0.02  * perCent );
+  
+  //NaITl
+  G4Element* Na = nistManager->FindOrBuildElement("Na", isotopes);
+  G4Element* I = nistManager->FindOrBuildElement("I", isotopes);
+  G4Element* Tl = nistManager->FindOrBuildElement("Tl", isotopes);
+  
+  G4Material* NaITl = new G4Material("NaITl", 3.67*g/cm3, 3);                   //check
+  NaITl->AddElement(Na, 15.35 * perCent);
+  NaITl->AddElement(I, 84.60 * perCent);
+  NaITl->AddElement(Tl, 0.05 * perCent);
+  
 
   // Definitions of Solids, Logical Volumes, Physical Volumes
   G4double detectorWidth = 5.0*cm;
@@ -78,7 +89,7 @@ G4VPhysicalVolume* BasicDetector::Construct( std::string Name, G4LogicalVolume* 
   // DETECTOR: Logical volume (how to treat it)
   G4LogicalVolume* detectorLV = new G4LogicalVolume(
                  detectorS,         // its solid
-                 LYSO,              // its material
+                 NaITl, //LYSO,              // its material
                  Name,              // its name
                  0, 0, 0 );         // Modifiers we don't use
 

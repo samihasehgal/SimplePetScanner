@@ -8,6 +8,7 @@ def CrystalVolume():
 
 def CrystalMass():
   return CrystalVolume() * 7.1
+  
 
 def DetectorVolume():
   return CrystalVolume() * 564480.0
@@ -26,6 +27,7 @@ def DetectorVolumeLength( Length ):
 def DetectorMassLength( Length ):
   nRings = float( math.ceil( Length / 231.84 ) )
   return CrystalMass() * 70560.0 * nRings
+
 
 def LSOunitsInMass( Mass ):
   yFraction = 0.2

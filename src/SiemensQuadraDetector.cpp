@@ -25,19 +25,31 @@ G4VPhysicalVolume* SiemensQuadraDetector::Construct( std::string Name, G4Logical
   G4bool isotopes = false;
 
   G4Material* crystal = nullptr;
-  if ( Material == "LSO" || Material == "" ) //default
+  //if ( Material == "LSO" || Material == "" ) //default
+  if ( Material == "NaITl" || Material == "" ) //default material for Siemens
   {
-    G4Element* O  = nistManager->FindOrBuildElement( "O" , isotopes );
-    G4Element* Si = nistManager->FindOrBuildElement( "Si", isotopes );
-    G4Element* Lu = nistManager->FindOrBuildElement( "Lu", isotopes );
-
-    G4Material* LSO = new G4Material( "Lu2SiO5", 7.4*g/cm3, 3 );
-    LSO->AddElement( Lu, 2 );
-    LSO->AddElement( Si, 1 );
-    LSO->AddElement( O , 5 );
-
-    crystal = LSO;
+    G4Element* Na  = nistManager->FindOrBuildElement( "Na" , isotopes );
+    G4Element* I = nistManager->FindOrBuildElement( "I", isotopes );
+    G4Element* Tl = nistManager->FindOrBuildElement("Tl", isotopes);
+    G4Material* NaITl = new G4Material( "NaITl", 3.67*g/cm3, 3 );
+    NaITl->AddElement( Na, 1 );
+    NaITl->AddElement( I, 1 );
+    NaITl->AddElement(Tl, 1);
+    crystal = NaITl;
   }
+  //else if (Material == "LSO")  
+  //{
+    //G4Element* O  = nistManager->FindOrBuildElement( "O" , isotopes );
+    //G4Element* Si = nistManager->FindOrBuildElement( "Si", isotopes );
+    //G4Element* Lu = nistManager->FindOrBuildElement( "Lu", isotopes );
+    
+    //G4Material* LSO = new G4Material( "Lu2SiO5", 7.4*g/cm3, 3 );
+    //LSO->AddElement( Lu, 2 );
+    //LSO->AddElement( Si, 1 );
+    //LSO->AddElement( O , 5 );
+
+    //crystal = LSO;
+  //}
   else if ( Material == "LYSO" )
   {
     G4Element* O  = nistManager->FindOrBuildElement( "O" , isotopes );
