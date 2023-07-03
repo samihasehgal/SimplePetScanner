@@ -38,18 +38,16 @@ G4VPhysicalVolume* ExplorerDetector::Construct( std::string Name, G4LogicalVolum
 
     crystal = LSO;
   }
-  else if ( Material == "NaITl" )
+  else if ( Material == "NaI" )
   {
     G4Element* Na  = nistManager->FindOrBuildElement( "Na" , isotopes );
     G4Element* I = nistManager->FindOrBuildElement( "I", isotopes );
-    G4Element* Tl = nistManager->FindOrBuildElement("Tl", isotopes);
 
-    G4Material* NaITl = new G4Material( "NaITl", 3.67*g/cm3, 3 );
-    NaITl->AddElement( Na, 1 );
-    NaITl->AddElement( I, 1 );
-    NaITl->AddElement(Tl, 1);
+    G4Material* NaI = new G4Material( "NaI", 3.67*g/cm3, 2 );
+    NaI->AddElement( Na, 1 );
+    NaI->AddElement( I, 1 );
 
-    crystal = NaITl;
+    crystal = NaI;
   }
   else if ( Material == "LYSO" || Material == "" ) //default
   {

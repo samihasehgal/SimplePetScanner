@@ -32,7 +32,7 @@ CrystalIntrinsicAction::~CrystalIntrinsicAction()
 void CrystalIntrinsicAction::GeneratePrimaries( G4Event* anEvent )
 {
   //if ( m_crystalType != "LSO" && m_crystalType != "LYSO" )
-  if ( m_crystalType != "NaITl" && m_crystalType != "LYSO")
+  if ( m_crystalType != "LSO" && m_crystalType != "LYSO" && m_crystalType != "NaI")
   {
     std::cerr << "Unrecognised crystal type: " << m_crystalType << std::endl;
     exit(1);

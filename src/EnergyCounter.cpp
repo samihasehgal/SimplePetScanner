@@ -63,11 +63,17 @@ G4bool EnergyCounter::ProcessHits( G4Step* step, G4TouchableHistory* history )
 // At the end of an event, store the energy collected in this detector
 void EnergyCounter::EndOfEvent( G4HCofThisEvent* )
 {
+  std::cout << "Inside EndOfEvent() from EnergyCounter.cpp" << std::endl;
   // Only output information for hits (since detector occupancy low)
   for ( const auto& entry : m_totalEnergyMap )
   {
     // Divide by the unit when outputting
     // see http://geant4.web.cern.ch/sites/geant4.web.cern.ch/files/geant4/collaboration/working_groups/electromagnetic/gallery/units/SystemOfUnits.html
+    m_outputFile << G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID() << " " << entry.first << " " << entry.second / keV << " ";
+    m_outputFile << m_averageTimeMap[ entry.first ] / ( entry.second * ns ) << " ";
+    m_outputFile << m_averageRMap[ entry.first ] / ( entry.second * mm ) << " ";
+    m_outputFile << m_averagePhiMap[ entry.first ] / entry.second << " ";
+    m_outputFile << m_averageZMap[ entry.first ] / ( entry.second * mm ) << std::endl;
     m_outputFile << G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID() << " " << entry.first << " " << entry.second / keV << " ";
     m_outputFile << m_averageTimeMap[ entry.first ] / ( entry.second * ns ) << " ";
     m_outputFile << m_averageRMap[ entry.first ] / ( entry.second * mm ) << " ";
